@@ -1,0 +1,7 @@
+{
+  "name": "buspassnew",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
