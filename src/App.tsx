@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
   IonIcon,
   IonLabel,
+  IonMenuButton,
   IonRouterOutlet,
+  IonSplitPane,
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonTitle,
+  IonToolbar,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, notificationsOutline, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
+import Tab2 from './pages/MenuPage';
 import Tab3 from './pages/Tab3';
 
 /* Core CSS required for Ionic components to work properly */
@@ -37,25 +45,42 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+export const PassContext = React.createContext<any>({})
+
+const App: React.FC = () => {
+  const[ passData, setPassData ] = useState()
+  return(
   <IonApp>
+    
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
+    <PassContext.Provider value={{ passData: passData, setPassData: setPassData}}>
+    <Tab2/>
+        <IonHeader>
+        <IonToolbar color={'secondary'}>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Digital Bus Pass</IonTitle>
+          <IonButtons slot="end">
+          <IonButton><IonIcon icon={notificationsOutline}></IonIcon></IonButton>
+        </IonButtons>
+        </IonToolbar>
+      </IonHeader>
+        <IonSplitPane contentId='main' style={{marginTop: "56px"}}>
+        
+        <IonRouterOutlet id="main" >
+          <Route exact path="/home" component={Tab1}/>
+          <Route exact path="/applybuspass" component={Tab3} />
           <Route path="/tab3">
             <Tab3 />
           </Route>
           <Route exact path="/">
-            <Redirect to="/tab1" />
+            <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+        
+        </IonSplitPane>
+        {/* <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon aria-hidden="true" icon={triangle} />
             <IonLabel>Tab 1</IonLabel>
@@ -68,10 +93,13 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={square} />
             <IonLabel>Tab 3</IonLabel>
           </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+          
+        </IonTabBar> */}
+      </PassContext.Provider>
     </IonReactRouter>
+    
   </IonApp>
-);
+  )
+}
 
 export default App;

@@ -1,0 +1,46 @@
+.header-md {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
+ion-card.gradientCard {
+    background-image: linear-gradient(to right, blue , rgb(137, 52, 248));
+    box-shadow: none;
+  }
+
+.card-content-ios {
+    padding: 10px;
+}
+.card-content-md {
+    padding: 10px;
+}
+
+h5.cardText {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+h5.cardTextGray{
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 18px;
+}
+
+h5.cardTextBlack{
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 18px;
+    color:#000!important ;
+}
+
+ion-menu.md ion-list{
+    padding: 0;
+}
+
+ion-list {
+    padding: 0;
+}
+
+.footer-md {
+    box-shadow: none;
+}
